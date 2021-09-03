@@ -14,11 +14,14 @@ const theme = createTheme({
       main: red.A400,
     },
     background: {
-      default: '#fff',
+      default: '#eee',
     },
   },
-  btn: {
-    margin: 10
+  menuButton: {
+    color: 'grey'
+  },
+  title: {
+    
   }
 });
 

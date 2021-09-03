@@ -6,11 +6,11 @@ import Router from 'next/router';
 import Input from '@material-ui/core/Input';
 import useRequest from '../../hooks/use-request';
 
-const SignUp = () => {
+const SignIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { doRequest, errors } = useRequest({
-    url: '/api/users/signup',
+    url: '/api/users/signin',
     method: 'post',
     body: {
       email,
@@ -27,7 +27,7 @@ const SignUp = () => {
 
   return (
     <Container>
-      <h1>Sign Up</h1>
+      <h1>Sign In</h1>
       <form onSubmit={onSubmit}>
         <div className='form-group'>
           <InputLabel>Email</InputLabel>
@@ -38,10 +38,10 @@ const SignUp = () => {
           <Input type='password' value={password} onChange={e => setPassword(e.target.value)} className='form-control' />
         </div>
         {errors}
-        <Button className='btn btn-primary' onClick={onSubmit} type='submit'>Sign Up</Button>
+        <Button className='btn btn-primary' onClick={onSubmit} type='submit'>Sign In</Button>
       </form>
     </Container>
   )
 }
 
-export default SignUp;
+export default SignIn;

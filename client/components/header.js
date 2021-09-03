@@ -43,7 +43,7 @@ const Header = ({ currentUser }) => {
           {currentUser && <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
             <MenuIcon />
           </IconButton>}
-          <Typography variant="h6" className={classes.title}>
+          <Typography variant="h6" className={classes.title} onClick={() => Router.push('/')}>
             Tickets
           </Typography>
           {currentUser ? (

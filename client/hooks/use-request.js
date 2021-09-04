@@ -1,10 +1,14 @@
 import axios from 'axios';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Alert from '@material-ui/lab/Alert';
 import AlertTitle from '@material-ui/lab/AlertTitle';
 
 const useRequest = ({url, method, body, onSuccess}) => {
   const [errors, setErrors] = useState(null);
+
+  useEffect(() => {
+    console.log(errors)
+  }, [errors])
 
   const doRequest = async () => {
     try {
@@ -21,13 +25,11 @@ const useRequest = ({url, method, body, onSuccess}) => {
             <AlertTitle>Sign Up Error</AlertTitle>
             <ul>
               {
-                err.response.data.errors.map(error => {
-                  return (
-                    <li>
-                      {error.message}<br></br>
-                    </li>
-                  )
-                })
+                err.response.data.errors.map(error => (
+                  <li>
+                    {error.message}<br></br>
+                  </li>
+                ))
               }
             </ul>
           </Alert>

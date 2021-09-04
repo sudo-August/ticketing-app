@@ -1,6 +1,6 @@
 import express from 'express';
 
-import { currentUser } from '../middlewares/current-user';
+import { currentUser } from '@planet-express/common';
 
 const router = express.Router();
 

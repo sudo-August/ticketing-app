@@ -8,6 +8,8 @@ import {
 
 } from '@planet-express/common';
 import { Ticket } from '../models/ticket';
+import { TicketUpdatedPublisher } from '../events/publishers/ticket-updated-publisher';
+import { natsWrapper } from '../nats-wrapper';
 
 const router = express.Router();
 
@@ -40,8 +42,15 @@ router.put(
     title: req.body.title,
     price: req.body.price
   });
+
   try {
     await ticket.save();
+    new TicketUpdatedPublisher(natsWrapper.client).publish({
+      id: ticket.id,
+      title: ticket.title,
+      price: ticket.price,
+      userId: ticket.userId
+    })
   } catch (err) {
     console.log('error saving update to ticket')
     console.log(err)

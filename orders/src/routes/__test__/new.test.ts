@@ -93,4 +93,23 @@ it('reserves a ticket', async () => {
     .expect(201)
 });
 
-it.todo('emits an event signaling the creation of an order')
+it('emits an event signaling the creation of an order', async () => {
+  const ticket = Ticket.build({
+    title: 'concert',
+    price: 20
+  });
+
+  try {
+    await ticket.save();
+  } catch {
+    console.log('error saving ticket to database');
+  }
+
+  await request(app)
+    .post('/api/orders')
+    .set('Cookie', signInCookie())
+    .send({ ticketId: ticket.id })
+    .expect(201)
+
+  expect(natsWrapper.client.publish).toHaveBeenCalled();
+});
